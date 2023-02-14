@@ -1,0 +1,14 @@
+.header {
+  justify-content: space-between;
+  display: flex;
+  padding: 17px 250px 19px 252px;
+}
+.header-logo {
+  color: rgb(70, 176, 70);
+  font-size: 20px;
+  font-weight: bold;
+  text-decoration: none;
+}
+.header-method {
+  text-decoration: none;
+}

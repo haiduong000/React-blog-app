@@ -1,0 +1,18 @@
+.pagination {
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 0px;
+}
+.pagination button {
+  list-style: none;
+  background-color: #fff;
+  padding: 10px 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.pagination button:hover {
+  color: #5cb85c;
+  cursor: pointer;
+  background-color: #a6d5a6;
+}

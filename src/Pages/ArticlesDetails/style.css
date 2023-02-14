@@ -1,0 +1,220 @@
+.articles-header {
+  padding: 17px 230px 19px 252px;
+  background-color: #333;
+}
+.articles-header h1 {
+  color: white;
+  font-weight: 500;
+}
+.articles-header__info {
+  display: flex;
+  color: white;
+}
+.articles-header__info--follow {
+  height: 30px;
+  display: flex;
+  background-color: #333;
+  color: #ccc;
+  border: 1px solid #ccc;
+  padding: 8px 10px 0px 10px;
+  margin-right: 10px;
+  border-radius: 4px;
+}
+.articles-body_tags {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 13px;
+  color: #999;
+  font-size: 13px;
+  font-weight: 100;
+}
+
+.articles-header__info--follow p {
+  margin: unset;
+  margin-left: 8px;
+}
+.articles-header__info--follow:hover {
+  background-color: #ccc;
+  color: white;
+  cursor: pointer;
+  transition: 0.1s ease-in;
+}
+.articles-header__info--unfollow {
+  height: 30px;
+  display: flex;
+  background-color: #549d54;
+  color: #ccc;
+  border: 1px solid #ccc;
+  padding: 8px 10px 0px 10px;
+  border: none;
+  border-radius: 4px;
+}
+.articles-header__info--unfollow p {
+  margin: unset;
+}
+.articles-header__info--unfollow:hover {
+  cursor: pointer;
+  color: white;
+  transition: 0.1s ease-in;
+}
+.articles-header__info--name {
+  margin-left: 6px;
+  margin-right: 20px;
+  margin-top: -5px;
+}
+.articles-header__info--name a {
+  text-decoration: none;
+  color: white;
+}
+.articles-header__info--name a:hover {
+  text-decoration: underline;
+}
+.articles-header__info--name h2 {
+  font-size: 16px;
+  margin: unset;
+}
+.articles-header__info--name p {
+  font-size: 12px;
+  margin: unset;
+}
+.articles-body {
+  padding: 17px 230px 19px 252px;
+}
+.articles-body p {
+  font-size: 18px;
+  line-height: 30px;
+}
+.articles-body__tags {
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 50px;
+}
+.button-tag {
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  margin: 0 5px;
+}
+.articles-footer {
+  text-align: center;
+}
+.articles-footer__info {
+  display: flex;
+  justify-content: center;
+}
+.articles-footer__info--name {
+  margin-left: 6px;
+  margin-right: 20px;
+}
+.articles-footer__info--name a {
+  text-decoration: none;
+  color: black;
+  font-weight: 300;
+}
+.articles-footer__info--name a:hover {
+  text-decoration: underline;
+}
+.articles-footer__info--name h2 {
+  font-size: 16px;
+  margin: unset;
+}
+.articles-footer__info--name p {
+  font-size: 12px;
+  margin: unset;
+}
+.articles-footer__info--follow {
+  height: 30px;
+  display: flex;
+  background-color: white;
+  color: #ccc;
+  border: 1px solid #ccc;
+  padding: 8px 10px 0px 10px;
+  margin-right: 10px;
+  border-radius: 4px;
+}
+.articles-footer__info--follow p {
+  margin: unset;
+  margin-left: 8px;
+}
+.articles-footer__info--follow:hover {
+  background-color: #ccc;
+  color: white;
+  cursor: pointer;
+  transition: 0.1s ease-out;
+}
+.articles-footer__info--unfollow {
+  height: 30px;
+  display: flex;
+  background-color: #549d54;
+  color: white;
+  border: 1px solid #ccc;
+  padding: 8px 10px 0px 10px;
+  border: none;
+  border-radius: 4px;
+}
+.articles-footer__info--unfollow p {
+  margin: unset;
+  margin-left: 8px;
+}
+.articles-footer__info--unfollow:hover {
+  background-color: #3c8b3c;
+  cursor: pointer;
+}
+.articles-footer__comment {
+  margin-top: 40px;
+}
+.articles-footer__comment--input--form {
+  font-size: 14px;
+  font-family: Arial, Helvetica, sans-serif;
+  width: 700px;
+  height: 100px;
+  border: 1px solid #ccc;
+  outline: none;
+  padding-left: 20px;
+  padding-top: 20px;
+  border-radius: 4px;
+}
+.articles-footer__comment--post {
+  background: #ccc;
+}
+.comment-list {
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  margin: -4px 397px;
+  margin-top: 30px;
+}
+.comment-user {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: #e5e5e5;
+}
+.comment-body {
+  width: max-content;
+  padding: 10px;
+}
+.comment-img {
+  width: 32px;
+  height: 32px;
+  margin-right: 5px;
+}
+
+.comment-time {
+  font-size: 12px;
+  font-family: "Source Sans Pro", sans-serif;
+  margin-left: 3px;
+  color: #109510;
+}
+.comment-delete {
+  padding: 10px 10px;
+  border: none;
+  color: rgb(168, 167, 167);
+  background-color: #e5e5e5;
+}
+.comment-delete i {
+  cursor: pointer;
+}
+.comment-delete i:hover {
+  color: rgb(127, 127, 127);
+}
+.icon {
+  padding-right: 6px;
+}

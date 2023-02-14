@@ -1,0 +1,25 @@
+.login {
+  text-align: center;
+  margin-top: 0px;
+}
+h1 {
+  font-weight: 450;
+  font-size: 40px;
+}
+.account-name {
+  text-decoration: none;
+  color: rgb(112, 185, 112);
+}
+.button-login_main {
+  border: 1px solid;
+  margin-left: 508px;
+  padding: 14px 26px;
+  border-radius: 6px;
+  background-color: rgb(80, 174, 80);
+  color: white;
+  font-size: 16px;
+}
+.button-login_main:hover {
+  background-color: rgb(51, 152, 51);
+  cursor: pointer;
+}
