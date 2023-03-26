@@ -1,4 +1,3 @@
-import { faLeaf } from "@fortawesome/free-solid-svg-icons";
 import { createSlice, configureStore, combineReducers } from "@reduxjs/toolkit";
 
 const userSlice = createSlice({

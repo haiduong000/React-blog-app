@@ -153,7 +153,6 @@ export const HomeAfterLogin = () => {
                     style={{ textDecoration: "none" }}
                     to={`/articles/${article.slug}`}
                   >
-                    {" "}
                     <h1 style={{ color: "black", margin: "unset" }}>
                       {article.title}
                     </h1>

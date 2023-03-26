@@ -44,7 +44,7 @@ export const PublishArticle = () => {
         setCommentList(res.data.comments);
         console.log(`${commentList.map((cm: any, index) => cm.body)}`);
       });
-  }, [slug]);
+  }, [commentList, slug]);
 
   const onSubmit = (values: any) => {
     if (values) {
@@ -73,7 +73,7 @@ export const PublishArticle = () => {
     }
   };
 
-  const hanldeFollow = () => {
+  const handleFollow = () => {
     var config = {
       method: isFollowing ? "delete" : "post",
       url: `https://api.realworld.io/api/profiles/${article.author.username}/follow`,
@@ -120,7 +120,7 @@ export const PublishArticle = () => {
         <div>
           <div className="articles">
             <div className="articles-header">
-              <h1>{article?.slug}</h1>
+              <h1 style={{ fontWeight: "normal" }}>{article?.slug}</h1>
               <div className="articles-header__info">
                 <Link to={`/${article?.author.username}`}>
                   <img
@@ -130,7 +130,7 @@ export const PublishArticle = () => {
                 </Link>
                 <div className="articles-header__info--name">
                   <Link to={`/${article?.author.username}`}>
-                    <h2 style={{ paddingRight: "25px" }}>
+                    <h2 style={{ paddingRight: "60px" }}>
                       {article.author.username}
                     </h2>
                   </Link>
@@ -138,7 +138,7 @@ export const PublishArticle = () => {
                   <p>{article.createdAt}</p>
                 </div>
                 <button
-                  onClick={hanldeFollow}
+                  onClick={handleFollow}
                   className="articles-header__info--follow"
                 >
                   <i style={{ marginRight: "4px" }} className="fa fa-plus"></i>
@@ -183,14 +183,14 @@ export const PublishArticle = () => {
                 </Link>
                 <div className="articles-footer__info--name">
                   <Link to={`/${article?.author.username}`}>
-                    <h2 style={{ paddingRight: "25px" }}>
+                    <h2 style={{ paddingRight: "60px" }}>
                       {article.author.username}
                     </h2>
                   </Link>
                   <p>{article.createdAt}</p>
                 </div>
                 <button
-                  onClick={hanldeFollow}
+                  onClick={handleFollow}
                   className="articles-footer__info--follow"
                 >
                   <i style={{ marginRight: "4px" }} className="fa fa-heart"></i>

@@ -4,10 +4,8 @@ import { useEffect, useState } from "react";
 import { httpClient } from "../../api/httpClient";
 import { Link, useParams } from "react-router-dom";
 import { Header } from "../../Components/Header";
-import { useSelector } from "react-redux";
 import axios from "axios";
 import "./style.css";
-import { error } from "console";
 
 export const ArticlesDetails = () => {
   const { slug } = useParams();
@@ -37,7 +35,6 @@ export const ArticlesDetails = () => {
         setCommentList(res.data.comments);
       })
       .finally(() => {
-        console.log("run");
         setComment("");
       });
   };
@@ -112,7 +109,7 @@ export const ArticlesDetails = () => {
         <div>
           <div className="articles">
             <div className="articles-header">
-              <h1>{article?.slug}</h1>
+              <h1>{article?.slug.replaceAll("-", " ")}</h1>
               <div className="articles-header__info">
                 <Link to={`/${article?.author.username}`}>
                   <img
@@ -135,10 +132,7 @@ export const ArticlesDetails = () => {
                 >
                   <i style={{ marginRight: "4px" }} className="fa fa-plus"></i>
                   {isFollowing ? "Unfollow" : "Follow"}
-                  <p style={{ marginLeft: "4px" }}>
-                    {" "}
-                    {article.author.username}
-                  </p>
+                  <p style={{ marginLeft: "4px" }}>{article.author.username}</p>
                 </button>
                 <button
                   onClick={hanldeFavorite}
@@ -152,7 +146,7 @@ export const ArticlesDetails = () => {
               </div>
             </div>
             <div className="articles-body">
-              <p>{article.body}</p>
+              <p>{article.body.replaceAll(/\\n/g, " ")}</p>
               <div
                 style={{
                   color: "#999",
@@ -190,10 +184,7 @@ export const ArticlesDetails = () => {
                 >
                   <i style={{ marginRight: "4px" }} className="fa fa-heart"></i>
                   {isFollowing ? "Unfollow" : "Follow"}
-                  <p style={{ marginLeft: "3px" }}>
-                    {" "}
-                    {article.author.username}
-                  </p>
+                  <p style={{ marginLeft: "3px" }}>{article.author.username}</p>
                 </button>
                 <button
                   onClick={hanldeFavorite}
@@ -202,12 +193,8 @@ export const ArticlesDetails = () => {
                   <img src={article.image} alt="" />
                   <i style={{ marginRight: "4px" }} className="fa fa-heart"></i>
                   {isFavorite ? "Unfavorite" : "Favorite"}
+                  <p style={{ marginLeft: "3px" }}>{article.author.username}</p>
                   <p style={{ marginLeft: "3px" }}>
-                    {" "}
-                    {article.author.username}
-                  </p>
-                  <p style={{ marginLeft: "3px" }}>
-                    {" "}
                     ({article.favoritesCount})
                   </p>
                 </button>
