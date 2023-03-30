@@ -1,5 +1,3 @@
-import React from "react";
-
 const Posts = ({ posts, loading }: any) => {
   if (loading) {
     return <h2>Loading...</h2>;

@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Header } from "../../../Components/Header";
@@ -150,18 +150,18 @@ export const HomeAfterLogin = () => {
                 </div>
                 <div className="home-content__body">
                   <Link
-                    style={{ textDecoration: "none" }}
+                    style={{ textDecoration: "none", textAlign: "justify" }}
                     to={`/articles/${article.slug}`}
                   >
                     <h1 style={{ color: "black", margin: "unset" }}>
                       {article.title}
                     </h1>
                   </Link>
-                  <p>{article.description}</p>
+                  <p style={{ textAlign: "justify" }}>{article.description}</p>
                 </div>
                 <div className="home-content__read">
                   <Link to={`/articles/${article.slug}`}>
-                    <p>Read more...</p>
+                    <p style={{ textDecoration: "underline" }}>Read more...</p>
                   </Link>
                   <Link
                     to={`/articles/${article.slug}`}
@@ -191,9 +191,15 @@ export const HomeAfterLogin = () => {
           <p>Popular Tags</p>
           <div className="home-main__tags-btn">
             {tags.map((tag: any, index: any) => (
-              <a onClick={() => handleClick(tag)} key={index} className="tag">
+              <Link
+                onClick={() => handleClick(tag)}
+                key={index}
+                className="tag"
+                to={""}
+                style={{ textDecoration: "none", color: "black" }}
+              >
                 {tag}
-              </a>
+              </Link>
             ))}
           </div>
         </div>

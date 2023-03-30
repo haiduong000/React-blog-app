@@ -1,0 +1,77 @@
+.button-main {
+  display: flex;
+}
+.articles-header__info--follow {
+  margin-top: 10px;
+  height: 30px;
+  display: flex;
+  background-color: #333;
+  color: #ccc;
+  border: 1px solid #ccc;
+  padding: 8px 10px 0px 10px;
+  margin-right: 10px;
+  border-radius: 4px;
+}
+.articles-header__info--follow p {
+  margin: unset;
+  margin-left: 8px;
+}
+.articles-header__info--follow:hover {
+  background-color: #ccc;
+  color: white;
+  cursor: pointer;
+  transition: 0.1s ease-in;
+}
+.articles-header__info--unfollow {
+  margin-top: 10px;
+  height: 30px;
+  display: flex;
+  background-color: #549d54;
+  color: #ccc;
+  border: 1px solid #ccc;
+  padding: 8px 10px 0px 10px;
+  border: none;
+  border-radius: 4px;
+}
+.articles-header__info--edit {
+  height: 30px;
+  display: flex;
+  background-color: #333;
+  color: #fff;
+  border: 1px solid #ccc;
+  padding: 8px 10px 0px 10px;
+  margin-right: 10px;
+  border-radius: 4px;
+}
+.articles-header__info--edit2 {
+  height: 30px;
+  display: flex;
+  background-color: #fff;
+  color: #000;
+  border: 1px solid #ccc;
+  padding: 8px 10px 0px 10px;
+  margin-right: 10px;
+  border-radius: 4px;
+}
+.articles-header__info--delete {
+  height: 30px;
+  display: flex;
+  background-color: rgba(0, 0, 0, 0);
+  color: #d86f6f;
+  border: 1px solid #d86f6f;
+  padding: 8px 10px 0px 10px;
+  margin-right: 10px;
+  border-radius: 4px;
+}
+.articles-header__info--unfollow p {
+  margin: unset;
+  margin-left: 8px;
+}
+.articles-header__info--unfollow:hover {
+  cursor: pointer;
+  color: white;
+  transition: 0.1s ease-in;
+}
+.icon {
+  padding-right: 6px;
+}

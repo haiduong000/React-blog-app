@@ -1,6 +1,4 @@
-import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import NavLink from "react-bootstrap/esm/NavLink";
 import "./style.css";
 
 export const HeaderBeforeLogin = () => {
@@ -30,7 +28,6 @@ export const HeaderBeforeLogin = () => {
             fontWeight: "400",
           }}
         >
-          {" "}
           Sign in
         </Link>
         <Link
@@ -42,7 +39,6 @@ export const HeaderBeforeLogin = () => {
             fontWeight: "400",
           }}
         >
-          {" "}
           Sign up
         </Link>
       </div>

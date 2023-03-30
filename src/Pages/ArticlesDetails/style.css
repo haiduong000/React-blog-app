@@ -58,6 +58,7 @@
   transition: 0.1s ease-in;
 }
 .articles-header__info--name {
+  padding-top: 10px;
   margin-left: 6px;
   margin-right: 20px;
   margin-top: -5px;
@@ -176,6 +177,7 @@
   background: #ccc;
 }
 .comment-list {
+  overflow: hidden;
   margin-top: 5px;
   border: 1px solid #ccc;
   margin: -4px 397px;

@@ -1,34 +1,42 @@
 import React from "react";
 import Form from "react-bootstrap/Form";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { httpClient } from "../../api/httpClient";
 import { Link, useParams } from "react-router-dom";
 import { Header } from "../../Components/Header";
-import axios from "axios";
+import { ButtonFollowFavoried } from "../../Components/ButtonFollowFavorited";
 import "./style.css";
+import { AppContext } from "../../Components/GlobalContext";
 
 export const ArticlesDetails = () => {
   const { slug } = useParams();
-  const [article, setArticle] = useState<any>(null);
   const [commentList, setCommentList] = useState<any>([]);
   const [user, setUser] = useState<any>(null);
-  const [isFollowing, setIsFollowing] = useState(true);
-  const [isFavorite, setIsFavorite] = useState(true);
   const [comment, setComment] = useState("");
-  const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhMTIzQGdtYWlsLmNvbSIsInVzZXJuYW1lIjoic2ExMjMiLCJpYXQiOjE2NzIwMjYwMzcsImV4cCI6MTY3NzIxMDAzN30.9Wznov9SdW8FtxZuYDoFgOqPA4_Whrn-DvL89tfutl8";
+
+  const {
+    article,
+    setArticle,
+    setIsFavorite,
+    setIsFollowing,
+    setCountFavorite,
+  } = useContext(AppContext);
 
   useEffect(() => {
     httpClient
-      .get(`https://api.realworld.io/api/articles/${slug}`)
+      .get(`/articles/${slug}`)
       .then((res) => {
         setArticle(res.data.article);
-        setIsFollowing(res.data.article.author.following);
         setIsFavorite(res.data.article.favorited);
+        setIsFollowing(res.data.article.author.following);
+        setCountFavorite(res.data.article.favoritesCount);
+      })
+      .catch((err) => {
+        console.log(err);
       });
   }, [slug]);
 
-  const getComment = () => {
+  useEffect(() => {
     httpClient
       .get(`https://api.realworld.io/api/articles/${slug}/comments`)
       .then((res) => {
@@ -37,68 +45,27 @@ export const ArticlesDetails = () => {
       .finally(() => {
         setComment("");
       });
-  };
-
-  useEffect(() => {
-    getComment();
   }, [slug]);
 
   const deleteComment = (item: any) => {
     const id = item.currentTarget.id;
-    httpClient
-      .delete(`articles/${slug}/comments/${id}`)
-      .then(() => getComment());
+    httpClient.delete(`articles/${slug}/comments/${id}`).then((res) => {
+      const remove = commentList.filter((item: any) => item.id !== id);
+      setCommentList(remove);
+    });
   };
 
-  const onSubmit = () => {
+  const onSubmit = (e: any) => {
+    e.preventDefault();
     httpClient
-      .post(`https://api.realworld.io/api/articles/${slug}/comments`, {
+      .post(`/articles/${slug}/comments`, {
         comment: {
           body: comment,
         },
       })
       .then((res) => {
-        getComment();
-      });
-  };
-
-  const handleFollow = () => {
-    var config = {
-      method: isFollowing ? "delete" : "post",
-      url: `https://api.realworld.io/api/profiles/${article.author.username}/follow`,
-      headers: {
-        Authorization: `Bearer ${token} `,
-        "Content-Type": "application/json",
-      },
-    };
-
-    axios(config)
-      .then(function (response) {
-        setIsFollowing(!isFollowing);
-        console.log(isFollowing);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
-
-  const hanldeFavorite = () => {
-    var config = {
-      method: isFavorite ? "delete" : "post",
-      url: `https://api.realworld.io/api/articles/${slug}/favorite`,
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    };
-
-    axios(config)
-      .then(function (response) {
-        setIsFavorite(!isFavorite);
-      })
-
-      .catch(function (error) {
-        console.log(error);
+        setCommentList([...commentList, res.data.comment]);
+        setComment("");
       });
   };
 
@@ -113,7 +80,11 @@ export const ArticlesDetails = () => {
               <div className="articles-header__info">
                 <Link to={`/${article?.author.username}`}>
                   <img
-                    style={{ borderRadius: "50%" }}
+                    style={{
+                      borderRadius: "50%",
+                      width: "50px",
+                      height: "50px",
+                    }}
                     src={article.author.image}
                     alt=""
                   />
@@ -126,27 +97,13 @@ export const ArticlesDetails = () => {
                   </Link>
                   <p>{article.createdAt}</p>
                 </div>
-                <button
-                  onClick={handleFollow}
-                  className="articles-header__info--follow"
-                >
-                  <i style={{ marginRight: "4px" }} className="fa fa-plus"></i>
-                  {isFollowing ? "Unfollow" : "Follow"}
-                  <p style={{ marginLeft: "4px" }}>{article.author.username}</p>
-                </button>
-                <button
-                  onClick={hanldeFavorite}
-                  className="articles-header__info--unfollow"
-                >
-                  <i style={{ marginRight: "4px" }} className="fa fa-heart"></i>
-                  {isFavorite ? "Unfavorite" : "Favorite"}
-                  <p style={{ marginLeft: "3px" }}> Articles</p>
-                  <p> ({article.favoritesCount})</p>
-                </button>
+                <ButtonFollowFavoried />
               </div>
             </div>
             <div className="articles-body">
-              <p>{article.body.replaceAll(/\\n/g, " ")}</p>
+              <p style={{ textAlign: "justify" }}>
+                {article.body.replaceAll(/\\n/g, " ")}
+              </p>
               <div
                 style={{
                   color: "#999",
@@ -165,7 +122,11 @@ export const ArticlesDetails = () => {
               <div className="articles-footer__info">
                 <Link to={`/${article?.author.username}`}>
                   <img
-                    style={{ borderRadius: "50%" }}
+                    style={{
+                      borderRadius: "50%",
+                      width: "50px",
+                      height: "50px",
+                    }}
                     src={article.author.image}
                     alt=""
                   />
@@ -178,26 +139,7 @@ export const ArticlesDetails = () => {
                   </Link>
                   <p>{article.createdAt}</p>
                 </div>
-                <button
-                  onClick={handleFollow}
-                  className="articles-footer__info--follow"
-                >
-                  <i style={{ marginRight: "4px" }} className="fa fa-heart"></i>
-                  {isFollowing ? "Unfollow" : "Follow"}
-                  <p style={{ marginLeft: "3px" }}>{article.author.username}</p>
-                </button>
-                <button
-                  onClick={hanldeFavorite}
-                  className="articles-footer__info--unfollow"
-                >
-                  <img src={article.image} alt="" />
-                  <i style={{ marginRight: "4px" }} className="fa fa-heart"></i>
-                  {isFavorite ? "Unfavorite" : "Favorite"}
-                  <p style={{ marginLeft: "3px" }}>{article.author.username}</p>
-                  <p style={{ marginLeft: "3px" }}>
-                    ({article.favoritesCount})
-                  </p>
-                </button>
+                <ButtonFollowFavoried />
               </div>
               <div className="articles-footer__comment">
                 <Form.Group

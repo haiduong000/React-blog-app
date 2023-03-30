@@ -131,6 +131,7 @@
 }
 
 .articles-main__content-title {
+  text-align: justify;
   font-size: 24px;
   color: #373a3c;
   font-weight: 600;

@@ -1,9 +1,9 @@
-import React from "react";
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import { Header } from "../../Components/Header";
 import axios from "axios";
+import { httpClient } from "../../api/httpClient";
 
 export const PublishArticle = () => {
   const { slug } = useParams();
@@ -13,37 +13,21 @@ export const PublishArticle = () => {
   const [isFollowing, setIsFollowing] = useState(true);
   const [isFavorite, setIsFavorite] = useState(true);
 
-  const tokenLogin = localStorage.getItem("userToken");
   const token =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhMTIzQGdtYWlsLmNvbSIsInVzZXJuYW1lIjoic2ExMjMiLCJpYXQiOjE2NzIwMjYwMzcsImV4cCI6MTY3NzIxMDAzN30.9Wznov9SdW8FtxZuYDoFgOqPA4_Whrn-DvL89tfutl8";
 
   useEffect(() => {
-    axios
-      .get(`https://api.realworld.io/api/articles/${slug}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      })
-      .then((res) => {
-        setArticle(res.data.article);
-        setIsFollowing(res.data.article.author.following);
-        setIsFavorite(res.data.article.favorited);
-      });
+    httpClient.get(`/articles/${slug}`).then((res) => {
+      setArticle(res.data.article);
+      setIsFollowing(res.data.article.author.following);
+      setIsFavorite(res.data.article.favorited);
+    });
   }, [slug]);
 
   useEffect(() => {
-    axios
-      .get(`https://api.realworld.io/api/articles/${slug}/comments`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      })
-      .then((res) => {
-        setCommentList(res.data.comments);
-        console.log(`${commentList.map((cm: any, index) => cm.body)}`);
-      });
+    httpClient.get(`/articles/${slug}/comments`).then((res) => {
+      setCommentList(res.data.comments);
+    });
   }, [commentList, slug]);
 
   const onSubmit = (values: any) => {
@@ -124,8 +108,13 @@ export const PublishArticle = () => {
               <div className="articles-header__info">
                 <Link to={`/${article?.author.username}`}>
                   <img
-                    style={{ borderRadius: "50%" }}
+                    style={{
+                      borderRadius: "50%",
+                      width: "50px",
+                      height: "50px",
+                    }}
                     src={article.author.image}
+                    alt=""
                   />
                 </Link>
                 <div className="articles-header__info--name">
