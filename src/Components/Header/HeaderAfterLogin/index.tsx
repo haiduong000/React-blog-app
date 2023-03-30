@@ -1,28 +1,15 @@
-import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import NavLink from "react-bootstrap/esm/NavLink";
-import { useSelector } from "react-redux";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
-import axios from "axios";
-
-const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhMTIzQGdtYWlsLmNvbSIsInVzZXJuYW1lIjoic2ExMjMiLCJpYXQiOjE2NzIwMjYwMzcsImV4cCI6MTY3NzIxMDAzN30.9Wznov9SdW8FtxZuYDoFgOqPA4_Whrn-DvL89tfutl8";
+import { httpClient } from "../../../api/httpClient";
 
 export const HeaderAfterLogin = () => {
   const [userValue, setUserValue] = useState<any>(null);
 
   useEffect(() => {
-    axios
-      .get(`https://api.realworld.io/api/user`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      })
-      .then((res) => {
-        setUserValue(res.data.user);
-      });
+    httpClient.get(`/user`).then((res) => {
+      setUserValue(res.data.user);
+      console.log(res);
+    });
   }, []);
 
   return (

@@ -62,7 +62,7 @@ export const ArticlesDetails = () => {
       });
   };
 
-  const hanldeFollow = () => {
+  const handleFollow = () => {
     var config = {
       method: isFollowing ? "delete" : "post",
       url: `https://api.realworld.io/api/profiles/${article.author.username}/follow`,
@@ -75,8 +75,8 @@ export const ArticlesDetails = () => {
     axios(config)
       .then(function (response) {
         setIsFollowing(!isFollowing);
+        console.log(isFollowing);
       })
-
       .catch(function (error) {
         console.log(error);
       });
@@ -127,7 +127,7 @@ export const ArticlesDetails = () => {
                   <p>{article.createdAt}</p>
                 </div>
                 <button
-                  onClick={hanldeFollow}
+                  onClick={handleFollow}
                   className="articles-header__info--follow"
                 >
                   <i style={{ marginRight: "4px" }} className="fa fa-plus"></i>
@@ -179,7 +179,7 @@ export const ArticlesDetails = () => {
                   <p>{article.createdAt}</p>
                 </div>
                 <button
-                  onClick={hanldeFollow}
+                  onClick={handleFollow}
                   className="articles-footer__info--follow"
                 >
                   <i style={{ marginRight: "4px" }} className="fa fa-heart"></i>
