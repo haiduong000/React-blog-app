@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import "./style.css";
 import { httpClient } from "../../api/httpClient";
 import { Header } from "../../Components/Header";
-import { ButtonFollowFavoried } from "../../Components/ButtonFollowFavorited";
 
 export const GuestProfile = () => {
   const [articles, setArticles] = useState([]);
@@ -18,6 +17,10 @@ export const GuestProfile = () => {
     setTab("setArticlesFavorited");
   };
 
+  const MyArticles = () => {
+    setTab("myarticle");
+  };
+
   useEffect(() => {
     httpClient.get(`/user`).then((res) => {
       setUserLogin(res.data.user);
@@ -26,15 +29,27 @@ export const GuestProfile = () => {
 
   useEffect(() => {
     if (tab === "myarticle") {
-      httpClient.get(`/articles?author=${username}`).then((res) => {
-        setArticles(res.data.articles);
-      });
-    } else {
-      httpClient.get(`/articles?favorited=${username}`).then((res) => {
-        setArticles(res.data.articles);
-      });
+      httpClient
+        .get("/articles", {
+          params: {
+            author: username,
+          },
+        })
+        .then((res) => {
+          setArticles(res.data.articles);
+        });
+    } else if (tab === "setArticlesFavorited") {
+      httpClient
+        .get("/articles", {
+          params: {
+            favorited: username,
+          },
+        })
+        .then((res) => {
+          setArticles(res.data.articles);
+        });
     }
-  }, [tab, username]);
+  }, [tab]);
 
   useEffect(() => {
     httpClient.get(`/user`).then((res) => {
@@ -72,9 +87,13 @@ export const GuestProfile = () => {
       <div className="articless">
         <div className="articles-main">
           <div className="articles-main__title">
-            <a className="articles-main__title-link" href="/myarticle">
+            <Link
+              className="articles-main__title-link"
+              onClick={MyArticles}
+              to={""}
+            >
               My Article
-            </a>
+            </Link>
             <p
               className="articles-main__title-favorited"
               onClick={favoritedArticles}

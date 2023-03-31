@@ -3,7 +3,6 @@ import { HeaderAfterLogin } from "./HeaderAfterLogin";
 
 export const Header = ({ children }: any) => {
   const token = localStorage.getItem("userToken");
-  console.log(token);
 
   return (
     <div>

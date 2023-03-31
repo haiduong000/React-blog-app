@@ -2,7 +2,7 @@ import React from "react";
 import Form from "react-bootstrap/Form";
 import { useEffect, useState, useContext } from "react";
 import { httpClient } from "../../api/httpClient";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Header } from "../../Components/Header";
 import { ButtonFollowFavoried } from "../../Components/ButtonFollowFavorited";
 import "./style.css";
@@ -13,6 +13,8 @@ export const ArticlesDetails = () => {
   const [commentList, setCommentList] = useState<any>([]);
   const [user, setUser] = useState<any>(null);
   const [comment, setComment] = useState("");
+  const token = localStorage.getItem("userToken");
+  const navigate = useNavigate();
 
   const {
     article,
@@ -38,7 +40,7 @@ export const ArticlesDetails = () => {
 
   useEffect(() => {
     httpClient
-      .get(`https://api.realworld.io/api/articles/${slug}/comments`)
+      .get(`/articles/${slug}/comments`)
       .then((res) => {
         setCommentList(res.data.comments);
       })
@@ -48,7 +50,7 @@ export const ArticlesDetails = () => {
   }, [slug]);
 
   const deleteComment = (item: any) => {
-    const id = item.currentTarget.id;
+    const id = item;
     httpClient.delete(`articles/${slug}/comments/${id}`).then((res) => {
       const remove = commentList.filter((item: any) => item.id !== id);
       setCommentList(remove);
@@ -57,16 +59,20 @@ export const ArticlesDetails = () => {
 
   const onSubmit = (e: any) => {
     e.preventDefault();
-    httpClient
-      .post(`/articles/${slug}/comments`, {
-        comment: {
-          body: comment,
-        },
-      })
-      .then((res) => {
-        setCommentList([...commentList, res.data.comment]);
-        setComment("");
-      });
+    if (!token) {
+      navigate("/login");
+    } else {
+      httpClient
+        .post(`/articles/${slug}/comments`, {
+          comment: {
+            body: comment,
+          },
+        })
+        .then((res) => {
+          setCommentList([...commentList, res.data.comment]);
+          setComment("");
+        });
+    }
   };
 
   return (
@@ -76,7 +82,9 @@ export const ArticlesDetails = () => {
         <div>
           <div className="articles">
             <div className="articles-header">
-              <h1>{article?.slug.replaceAll("-", " ")}</h1>
+              <h1 style={{ textAlign: "justify" }}>
+                {article?.slug.replaceAll("-", " ")}
+              </h1>
               <div className="articles-header__info">
                 <Link to={`/${article?.author.username}`}>
                   <img
@@ -156,7 +164,7 @@ export const ArticlesDetails = () => {
                   />
                 </Form.Group>
                 <div className="articles-footer__comment--post">
-                  <img src={user?.image} alt="" className="header-img" />
+                  <img src={user?.username} alt="" className="header-img" />
                   <button onClick={onSubmit}>Post Comment</button>
                 </div>
                 {commentList?.length > 0 &&
@@ -187,8 +195,7 @@ export const ArticlesDetails = () => {
                           </span>
                         </div>
                         <button
-                          id={comment.id}
-                          onClick={deleteComment}
+                          onClick={() => deleteComment(comment.id)}
                           className="comment-delete"
                         >
                           <i className="fas fa-trash-alt"></i>

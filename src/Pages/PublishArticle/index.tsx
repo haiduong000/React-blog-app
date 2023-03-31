@@ -82,8 +82,7 @@ export const PublishArticle = () => {
       method: isFavorite ? "delete" : "post",
       url: `https://api.realworld.io/api/articles/${slug}/favorite`,
       headers: {
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhMTIzQGdtYWlsLmNvbSIsInVzZXJuYW1lIjoic2ExMjMiLCJpYXQiOjE2NzIwMjYwMzcsImV4cCI6MTY3NzIxMDAzN30.9Wznov9SdW8FtxZuYDoFgOqPA4_Whrn-DvL89tfutl8",
+        Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
     };

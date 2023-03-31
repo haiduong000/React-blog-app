@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { HeaderAfterLogin } from "../../Components/Header/HeaderAfterLogin";
 import InputGroup from "react-bootstrap/InputGroup";
 import Form from "react-bootstrap/Form";
 import { Button } from "react-bootstrap";
 import { httpClient } from "../../api/httpClient";
 import { useNavigate, useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
 import "./style.css";
 import { Header } from "../../Components/Header";
 

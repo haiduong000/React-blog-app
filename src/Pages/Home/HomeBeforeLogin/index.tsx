@@ -117,7 +117,7 @@ export const HomeBeforeLogin = () => {
                 </div>
                 <div className="home-content__body">
                   <Link
-                    style={{ textDecoration: "none" }}
+                    style={{ textDecoration: "none", textAlign: "justify" }}
                     to={`/articles/${article.slug}`}
                   >
                     <h1 style={{ color: "black", margin: "unset" }}>

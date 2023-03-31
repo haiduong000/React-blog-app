@@ -106,7 +106,7 @@ export const HomeAfterLogin = () => {
             <button onClick={yourfeed}>Your Feed</button>
             <button onClick={allFeed}>Global Feed</button>
             <p style={{ margin: "unset", paddingTop: "5px" }}>
-              {tagList ? tagList : ""}
+              {`${tagList ? tagList : ""}`}
             </p>
           </div>
           {currentPosts.length > 0 &&

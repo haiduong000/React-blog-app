@@ -15,7 +15,7 @@ export const HeaderAfterLogin = () => {
   return (
     <div className="header">
       <Link to="/" className="header-logo">
-        conduit
+        BlogReact
       </Link>
       <div className="header-method">
         <Link

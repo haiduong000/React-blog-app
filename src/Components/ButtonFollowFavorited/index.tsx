@@ -17,7 +17,7 @@ export const ButtonFollowFavoried = () => {
     userLogin,
     countFavorite,
     setCountFavorite,
-  } = useContext(AppContext); // const [isFollowing, setIsFollowing] = useState(true);
+  } = useContext(AppContext); 
 
   const hanldeFollow = () => {
     if (!token) {

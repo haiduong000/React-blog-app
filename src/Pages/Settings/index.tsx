@@ -46,9 +46,9 @@ export const Settings = () => {
   return (
     <>
       <HeaderAfterLogin />
-      <div className="form-setting">
+      <div className="form-setting" onSubmit={handleSubmit}>
         <h1>Your Settings</h1>
-        <InputGroup size="lg" onSubmit={handleSubmit}>
+        <InputGroup size="lg">
           <Form.Control
             aria-label="Large"
             aria-describedby="inputGroup-sizing-sm"
