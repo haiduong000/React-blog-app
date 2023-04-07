@@ -1,4 +1,3 @@
-import React, { JSXElementConstructor } from "react";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -65,7 +64,7 @@ export const HomeBeforeLogin = () => {
     <>
       <Header />
       <div className="home-title">
-        <h1>conduit</h1>
+        <h1>BlogReact</h1>
         <p>A place to share your knowledge</p>
       </div>
       <div className="home-main">
@@ -148,9 +147,14 @@ export const HomeBeforeLogin = () => {
           <p>Popular Tags</p>
           <div className="home-main__tags-btn">
             {tags.map((tag: any, index: any) => (
-              <a onClick={() => handleClick(tag)} key={index} className="tag">
+              <Link
+                onClick={() => handleClick(tag)}
+                key={index}
+                className="tag"
+                to={""}
+              >
                 {tag}
-              </a>
+              </Link>
             ))}
           </div>
         </div>

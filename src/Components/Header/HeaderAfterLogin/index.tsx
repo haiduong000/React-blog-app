@@ -8,7 +8,6 @@ export const HeaderAfterLogin = () => {
   useEffect(() => {
     httpClient.get(`/user`).then((res) => {
       setUserValue(res.data.user);
-      console.log(res);
     });
   }, []);
 

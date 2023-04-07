@@ -165,7 +165,7 @@
 .articles-footer__comment--input--form {
   font-size: 14px;
   font-family: Arial, Helvetica, sans-serif;
-  width: 700px;
+  width: 869px;
   height: 100px;
   border: 1px solid #ccc;
   outline: none;
@@ -173,8 +173,12 @@
   padding-top: 20px;
   border-radius: 4px;
 }
+
 .articles-footer__comment--post {
   background: #ccc;
+}
+.articles-footer__comment--post button {
+  margin-left: 156px;
 }
 .comment-list {
   overflow: hidden;

@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import InputGroup from "react-bootstrap/InputGroup";
 import Form from "react-bootstrap/Form";
 import { Button } from "react-bootstrap";
 import { httpClient } from "../../api/httpClient";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./style.css";
 import { Header } from "../../Components/Header";
+import { AppContext } from "../../Components/GlobalContext";
 
 export const Editor = () => {
   const [title, setTitle] = useState("");
@@ -18,7 +19,6 @@ export const Editor = () => {
 
   const handleRemove = (index: number) => {
     const remove = tagList.filter((_, item: any) => item !== index);
-    console.log(remove);
     setTagList(remove);
   };
 
@@ -48,7 +48,7 @@ export const Editor = () => {
   return (
     <>
       <Header />
-      <Form className="form" onSubmit={handleSubmit}>
+      <Form className="form">
         <InputGroup size="lg">
           <Form.Control
             aria-label="Large"
