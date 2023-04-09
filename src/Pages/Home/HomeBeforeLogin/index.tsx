@@ -42,8 +42,6 @@ export const HomeBeforeLogin = () => {
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = articles.slice(indexOfFirstPost, indexOfLastPost);
-  console.log(currentPosts);
-  console.log(articles);
 
   const handleClick = (tagName: any) => {
     setTagList(tagName);

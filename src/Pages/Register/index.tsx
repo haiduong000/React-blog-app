@@ -10,12 +10,9 @@ import { setUser } from "../../Components/Store";
 import "./style.css";
 
 export const Register = () => {
-  const [username, setUsername] = useState("");
   const [emailHandle, setEmailHandle] = useState("");
   const [passwordHandle, setPasswordHandle] = useState("");
   const [errorHandle, setErrorHandle] = useState("");
-  const [handleLove, setHandleLove] = useState("");
-  const [error, setError] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleSubmitRegister = (e: any) => {
