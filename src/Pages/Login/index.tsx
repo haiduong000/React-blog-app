@@ -64,7 +64,6 @@ export const Login = () => {
                 placeholder="Email"
                 style={{ width: "600px", height: "40px", marginBottom: "20px" }}
               />
-              {/* <Form.Text className="text-muted">Error</Form.Text> */}
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicPassword">
               <Form.Control

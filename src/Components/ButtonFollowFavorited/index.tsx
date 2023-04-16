@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { httpClient } from "../../api/httpClient";
 import { AppContext } from "../GlobalContext";
 import "./style.css";
@@ -17,7 +17,7 @@ export const ButtonFollowFavoried = () => {
     userLogin,
     countFavorite,
     setCountFavorite,
-  } = useContext(AppContext); 
+  } = useContext(AppContext);
 
   const hanldeFollow = () => {
     if (!token) {
