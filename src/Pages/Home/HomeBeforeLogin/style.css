@@ -39,6 +39,8 @@
   border-radius: 12px;
   margin-top: 7px;
   cursor: pointer;
+  text-decoration: none;
+  color: black;
 }
 .home-content {
   border-bottom: 1px solid #ccc;

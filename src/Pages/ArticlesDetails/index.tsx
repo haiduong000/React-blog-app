@@ -164,7 +164,7 @@ export const ArticlesDetails = () => {
                   />
                 </Form.Group>
                 <div className="articles-footer__comment--post">
-                  <img src={user?.username} alt="" className="header-img" />
+                  <img src={user?.userName} alt="" className="header-img" />
                   <button onClick={onSubmit}>Post Comment</button>
                 </div>
                 {commentList?.length > 0 &&
