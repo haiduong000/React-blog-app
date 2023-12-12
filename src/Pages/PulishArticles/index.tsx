@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import InputGroup from "react-bootstrap/InputGroup";
 import Form from "react-bootstrap/Form";
 import { Button } from "react-bootstrap";
@@ -6,9 +6,8 @@ import { httpClient } from "../../api/httpClient";
 import { useNavigate } from "react-router-dom";
 import "./style.css";
 import { Header } from "../../Components/Header";
-import { AppContext } from "../../Components/GlobalContext";
 
-export const Editor = () => {
+export const NewArticles = () => {
   const [title, setTitle] = useState("");
   const [heading, setHeading] = useState("");
   const [mainBody, setMainBody] = useState("");
@@ -24,6 +23,7 @@ export const Editor = () => {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
+
     httpClient
       .post("/articles", {
         article: {
@@ -35,7 +35,6 @@ export const Editor = () => {
       })
       .then((res: any) => {
         if (res.status === 200) {
-          console.log(res.data);
           setTitle("");
           setHeading("");
           setMainBody("");
@@ -43,11 +42,18 @@ export const Editor = () => {
           setTags("");
           navigate("/");
         }
+      })
+      .catch(() => {
+        alert("All field need to be filled");
       });
   };
+
   return (
     <>
       <Header />
+      <div>
+        <h1 style={{ textAlign: "center" }}>New Articles</h1>
+      </div>
       <Form className="form">
         <InputGroup size="lg">
           <Form.Control

@@ -1,6 +1,6 @@
 /* eslint-disable array-callback-return */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import "./style.css";
@@ -25,7 +25,6 @@ export const HomeBeforeLogin = () => {
 
   useEffect(() => {
     const fetchArtices = async () => {
-      setLoading(true);
       const res = await httpClient.get(
         "https://api.realworld.io/api/articles",
         {
@@ -36,7 +35,6 @@ export const HomeBeforeLogin = () => {
         }
       );
       setArticles(res.data.articles);
-      setLoading(false);
     };
     fetchArtices();
   }, []);
@@ -45,9 +43,9 @@ export const HomeBeforeLogin = () => {
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = articles.slice(indexOfFirstPost, indexOfLastPost);
 
-  const handleClick = (tagName: any) => {
+  const getTagName = (tagName: any) => {
     setTagList(tagName);
-    axios
+    httpClient
       .get("https://conduit.productionready.io/api/articles", {
         params: {
           tag: tagName,
@@ -71,7 +69,9 @@ export const HomeBeforeLogin = () => {
         <div className="home-main__global">
           <div className="home-main__global-feed">
             <Link style={{ display: "flex", textDecoration: "none" }} to="/">
-              <button>Global Feed</button>
+              <button style={{ color: "green", padding: "10px 0px" }}>
+                Global Feed
+              </button>
               <p>{tagList ? tagList : ""} </p>
             </Link>
           </div>
@@ -103,12 +103,13 @@ export const HomeBeforeLogin = () => {
                         </h1>
                       </Link>
                       <p className="home-content__header-daytime">
-                        {article.createdAt}
+                        {`${new Date(article.createdAt).toDateString()}`}
                       </p>
                     </div>
                   </div>
                   <button className="home-content__header-heartbtn">
                     <i className="fas fa-heart"></i>
+
                     <span onClick={() => setAddCount()}>
                       {article.favoritesCount}
                     </span>
@@ -144,11 +145,11 @@ export const HomeBeforeLogin = () => {
           </div>
         </div>
         <div className="home-main__tags">
-          <p>Popular Tags</p>
+          <p style={{ fontWeight: "bold" }}>Popular Tags</p>
           <div className="home-main__tags-btn">
             {tags.map((tag: any, index: any) => (
               <Link
-                onClick={() => handleClick(tag)}
+                onClick={() => getTagName(tag)}
                 key={index}
                 className="tag"
                 to={""}

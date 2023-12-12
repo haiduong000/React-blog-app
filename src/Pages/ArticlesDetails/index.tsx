@@ -12,9 +12,10 @@ export const ArticlesDetails = () => {
   const { slug } = useParams();
   const [commentList, setCommentList] = useState<any>([]);
   const [user, setUser] = useState<any>(null);
-  const [comment, setComment] = useState("");
+  const [comment, setComment] = useState<string>("");
   const token = localStorage.getItem("userToken");
   const navigate = useNavigate();
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
   const {
     article,
@@ -25,28 +26,27 @@ export const ArticlesDetails = () => {
   } = useContext(AppContext);
 
   useEffect(() => {
-    httpClient
-      .get(`/articles/${slug}`)
-      .then((res) => {
-        setArticle(res.data.article);
-        setIsFavorite(res.data.article.favorited);
-        setIsFollowing(res.data.article.author.following);
-        setCountFavorite(res.data.article.favoritesCount);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    httpClient.get(`/articles/${slug}`).then((res) => {
+      setArticle(res.data.article);
+      setIsFavorite(res.data.article.favorited);
+      setIsFollowing(res.data.article.author.following);
+      setCountFavorite(res.data.article.favoritesCount);
+    });
   }, [slug]);
 
   useEffect(() => {
-    httpClient
-      .get(`/articles/${slug}/comments`)
-      .then((res) => {
-        setCommentList(res.data.comments);
-      })
-      .finally(() => {
-        setComment("");
-      });
+    try {
+      httpClient
+        .get(`/articles/${slug}/comments`)
+        .then((res) => {
+          setCommentList(res.data.comments);
+        })
+        .finally(() => {
+          setComment("");
+        });
+    } catch (err) {
+      setErrorMessage("Unable to delete comment");
+    }
   }, [slug]);
 
   const deleteComment = (item: any) => {
@@ -82,7 +82,7 @@ export const ArticlesDetails = () => {
         <div>
           <div className="articles">
             <div className="articles-header">
-              <h1 style={{ textAlign: "justify" }}>
+              <h1 style={{ textAlign: "justify", color: "#ccc" }}>
                 {article?.slug.replaceAll("-", " ")}
               </h1>
               <div className="articles-header__info">
@@ -103,7 +103,7 @@ export const ArticlesDetails = () => {
                       {article.author.username}
                     </h2>
                   </Link>
-                  <p>{article.createdAt}</p>
+                  <p>{`${new Date(article.createdAt).toDateString()}`}</p>
                 </div>
                 <ButtonFollowFavoried />
               </div>
@@ -141,11 +141,13 @@ export const ArticlesDetails = () => {
                 </Link>
                 <div className="articles-footer__info--name">
                   <Link to={`/${article?.author.username}`}>
-                    <h2 style={{ paddingRight: "25px" }}>
+                    <h2 style={{ paddingRight: "60px" }}>
                       {article.author.username}
                     </h2>
                   </Link>
-                  <p>{article.createdAt}</p>
+                  <p style={{ paddingRight: "46px" }}>{`${new Date(
+                    article.createdAt
+                  ).toDateString()}`}</p>
                 </div>
                 <ButtonFollowFavoried />
               </div>
@@ -191,7 +193,7 @@ export const ArticlesDetails = () => {
                             {comment?.author?.username}
                           </Link>
                           <span className="comment-time">
-                            {article.createdAt}
+                            {`${new Date(article.createdAt).toDateString()}`}
                           </span>
                         </div>
                         <button

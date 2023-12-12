@@ -25,7 +25,9 @@ export const Login = () => {
           },
         })
         .then((res: any) => {
-          if (res.status === 200) {
+          if (res.status === 403) {
+            alert("Error");
+          } else if (res.status === 200) {
             dispatch(setUser({ ...res.data.user }));
             localStorage.setItem("userToken", res.data.user.token);
             navigate("/");
@@ -33,13 +35,9 @@ export const Login = () => {
             setPassword("");
             setError("");
           }
-          if (res.status !== 200) {
-            setError("Error");
-            alert("Error");
-          }
         });
     } catch (err) {
-      console.log(err);
+      alert("username or password is invalid");
     }
   };
 

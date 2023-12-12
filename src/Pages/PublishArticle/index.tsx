@@ -123,7 +123,7 @@ export const PublishArticle = () => {
                     </h2>
                   </Link>
 
-                  <p>{article.createdAt}</p>
+                  <p>{`${new Date(article.createdAt).toDateString()}`}</p>
                 </div>
                 <button
                   onClick={handleFollow}
@@ -175,7 +175,7 @@ export const PublishArticle = () => {
                       {article.author.username}
                     </h2>
                   </Link>
-                  <p>{article.createdAt}</p>
+                  <p>{`${new Date(article.createdAt).toDateString()}`}</p>
                 </div>
                 <button
                   onClick={handleFollow}

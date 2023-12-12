@@ -2,13 +2,17 @@
   display: flex;
   width: 100%;
   justify-content: space-between;
-  padding: 10px 0;
-  background-color: #f1f1f1;
+  background-image: url("https://images.unsplash.com/photo-1432821596592-e2c18b78144f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8YmxvZyUyMGJhY2tncm91bmR8ZW58MHx8MHx8&w=1000&q=80");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 400px;
 }
 
 .profile-list {
-  padding-left: 700px;
+  padding-left: 842px;
   text-align: center;
+  padding-top: 125px;
 }
 .profile-list__img {
   border-radius: 50%;
@@ -23,6 +27,7 @@
   text-align: center;
   font-weight: 600;
   margin-bottom: 0;
+  color: white;
 }
 
 .profile-list__btn {
@@ -79,6 +84,7 @@
   font-size: 16px;
   margin-bottom: 0;
   color: #ccc;
+  padding: 24px 0px;
 }
 .articles-main__title-link:hover {
   color: #1faa1f;
@@ -125,6 +131,7 @@
   color: #5cb85c;
   font-size: 14px;
 }
+
 .articles-main__content-main-btn:hover {
   background-color: #5cb85c;
   color: #fff;

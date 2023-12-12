@@ -169,6 +169,10 @@
   font-weight: 100;
   margin: 0px 2px;
 }
+.home-main__tags {
+  border-radius: 10px;
+}
+
 .home-main__tags-btn a {
   margin-right: 2px;
 }

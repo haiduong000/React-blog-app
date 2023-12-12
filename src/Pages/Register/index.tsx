@@ -46,7 +46,6 @@ export const Register = () => {
 
   return (
     <>
-      <HeaderBeforeLogin />
       <div className="logout">
         <h1>Sign Up</h1>
         <Link className="account-name" to="/login">

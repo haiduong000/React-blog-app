@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { httpClient } from "../../api/httpClient";
 import { AppContext } from "../GlobalContext";
 import "./style.css";
@@ -19,7 +19,7 @@ export const ButtonFollowFavoried = () => {
     setCountFavorite,
   } = useContext(AppContext);
 
-  const hanldeFollow = () => {
+  const handleFollow = () => {
     if (!token) {
       navigate("/login");
     }
@@ -36,7 +36,7 @@ export const ButtonFollowFavoried = () => {
       });
   };
 
-  const hanldeFavorite = () => {
+  const handleFavorite = () => {
     if (!token) {
       navigate("/login");
     }
@@ -51,19 +51,18 @@ export const ButtonFollowFavoried = () => {
           ? setCountFavorite((prev: any) => prev - 1)
           : setCountFavorite((prev: any) => prev + 1);
       })
-
       .catch((error) => {
         console.log(error);
       });
   };
 
-  const hanldeEdit = () => {
+  const handleEdit = () => {
     if (!token) {
       navigate("/login");
     }
   };
 
-  const hanldeDeleteArticle = () => {
+  const handleDeleteArticle = () => {
     if (!token) {
       navigate("/login");
     } else {
@@ -77,14 +76,14 @@ export const ButtonFollowFavoried = () => {
     <div className="button-main">
       {article?.author?.username === userLogin?.username ? (
         <>
-          <button onClick={hanldeEdit} className="articles-header__info--edit">
+          <button onClick={handleEdit} className="articles-header__info--edit">
             <span className="icon">
               <i className="far fa-edit"></i>
             </span>
             {"Edit Article"}
           </button>
           <button
-            onClick={hanldeDeleteArticle}
+            onClick={handleDeleteArticle}
             className="articles-header__info--delete"
           >
             <span className="icon">
@@ -96,7 +95,7 @@ export const ButtonFollowFavoried = () => {
       ) : (
         <>
           <button
-            onClick={hanldeFollow}
+            onClick={handleFollow}
             className="articles-header__info--follow"
           >
             <span className="icon">
@@ -106,7 +105,7 @@ export const ButtonFollowFavoried = () => {
             {article?.author?.username}
           </button>
           <button
-            onClick={hanldeFavorite}
+            onClick={handleFavorite}
             className="articles-header__info--unfollow"
           >
             <span className="icon">

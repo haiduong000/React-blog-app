@@ -1,6 +1,8 @@
 .articles-header {
   padding: 17px 230px 19px 252px;
-  background-color: #333;
+  background-image: url("https://images.pexels.com/photos/1025349/pexels-photo-1025349.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+  background-size: 1688px 700px;
+  background-repeat: no-repeat;
 }
 .articles-header h1 {
   color: white;

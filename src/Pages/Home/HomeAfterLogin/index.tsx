@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { Header } from "../../../Components/Header";
 import Pagination from "../../Pagination";
 import { httpClient } from "../../../api/httpClient";
@@ -9,12 +8,14 @@ import "./style.css";
 export const HomeAfterLogin = () => {
   const [tags, setTags] = useState<any>([]);
   const [articles, setArticles] = useState([]);
-  const [count, setCount] = useState<any>();
   const [loading, setLoading] = useState(false);
   const [tagList, setTagList] = useState<any>("");
   const [feed, setFeed] = useState<any>("yourfeed");
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(10);
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = articles.slice(indexOfFirstPost, indexOfLastPost);
 
   const allFeed = () => {
     setFeed("allFeed");
@@ -23,21 +24,15 @@ export const HomeAfterLogin = () => {
     setFeed("yourfeed");
   };
 
-  // pagination
   useEffect(() => {
     const fetchArtices = async () => {
       setLoading(true);
-      const res = await httpClient.get(
-        "https://api.realworld.io/api/articles?limit=100&offset=0"
-      );
+      const res = await httpClient.get("/articles?limit=100&offset=0");
       setArticles(res.data.articles);
       setLoading(false);
     };
     fetchArtices();
   }, []);
-  const indexOfLastPost = currentPage * postsPerPage;
-  const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = articles.slice(indexOfFirstPost, indexOfLastPost);
 
   useEffect(() => {
     if (feed === "yourfeed") {
@@ -72,14 +67,15 @@ export const HomeAfterLogin = () => {
   }, [feed]);
 
   useEffect(() => {
-    axios.get(`https://api.realworld.io/api/tags`).then((res) => {
+    httpClient.get(`/tags`).then((res) => {
       setTags(res.data.tags);
     });
   }, []);
+
   const handleClick = (tagName: any) => {
     setTagList(tagName);
-    axios
-      .get("https://conduit.productionready.io/api/articles", {
+    httpClient
+      .get("/articles", {
         params: {
           tag: tagName,
         },
@@ -87,9 +83,6 @@ export const HomeAfterLogin = () => {
       .then((res: any) => setArticles(res.data.articles));
   };
 
-  const setAddCount = () => {
-    setCount(() => count + 1);
-  };
   // Change page
   const paginate = (pageNumber: any) => setCurrentPage(pageNumber);
 
@@ -103,7 +96,9 @@ export const HomeAfterLogin = () => {
       <div className="home-main">
         <div className="home-main__global">
           <div className="home-main__global-feed">
-            <button onClick={yourfeed}>Your Feed</button>
+            <button style={{ padding: "10px 0px" }} onClick={yourfeed}>
+              Your Feed
+            </button>
             <button onClick={allFeed}>Global Feed</button>
             <p style={{ margin: "unset", paddingTop: "5px" }}>
               {`${tagList ? tagList : ""}`}
@@ -121,7 +116,9 @@ export const HomeAfterLogin = () => {
                         width: "32px",
                         height: "32px",
                       }}
-                      src={article.author.image}
+                      src={
+                        "https://images.pexels.com/photos/1123829/pexels-photo-1123829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                      }
                       alt=""
                     />
                     <div>
@@ -137,15 +134,13 @@ export const HomeAfterLogin = () => {
                         </h1>
                       </Link>
                       <p className="home-content__header-daytime">
-                        {article.createdAt}
+                        {`${new Date(article.createdAt).toDateString()}`}
                       </p>
                     </div>
                   </div>
                   <button className="home-content__header-heartbtn">
                     <i className="fas fa-heart"></i>
-                    <span onClick={() => setAddCount()}>
-                      {article.favoritesCount}
-                    </span>
+                    <span>{article.favoritesCount}</span>
                   </button>
                 </div>
                 <div className="home-content__body">
@@ -167,7 +162,7 @@ export const HomeAfterLogin = () => {
                     to={`/articles/${article.slug}`}
                     style={{
                       color: "#999",
-                      paddingLeft: "440px",
+                      paddingLeft: "500px",
                     }}
                   >
                     {article.tagList.map((tag: any, index: any) => (
@@ -188,7 +183,7 @@ export const HomeAfterLogin = () => {
           </div>
         </div>
         <div className="home-main__tags">
-          <p>Popular Tags</p>
+          <p style={{ fontWeight: "bold" }}>Popular Tags</p>
           <div className="home-main__tags-btn">
             {tags.map((tag: any, index: any) => (
               <Link
@@ -196,7 +191,11 @@ export const HomeAfterLogin = () => {
                 key={index}
                 className="tag"
                 to={""}
-                style={{ textDecoration: "none", color: "black" }}
+                style={{
+                  textDecoration: "none",
+                  color: "white",
+                  borderRadius: "4px",
+                }}
               >
                 {tag}
               </Link>

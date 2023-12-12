@@ -80,7 +80,11 @@ export const GuestProfile = () => {
       <Header />
       <div className="profile">
         <div className="profile-list">
-          <img className="profile-list__img" src={user?.image} alt="" />
+          <img
+            className="profile-list__img"
+            src="https://images.pexels.com/photos/1123829/pexels-photo-1123829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+            alt=""
+          />
           <p className="profile-list__username">{user?.username}</p>
         </div>
       </div>
@@ -108,7 +112,7 @@ export const GuestProfile = () => {
                   <div className="articles-main__content-main-info">
                     <img
                       className="articles-main__content-main-info-img"
-                      src={article.author.image}
+                      src="https://images.pexels.com/photos/1123829/pexels-photo-1123829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                       alt=""
                     />
                     <div>
@@ -119,7 +123,7 @@ export const GuestProfile = () => {
                         {article.author.username}
                       </Link>
                       <p className="articles-main__content-main-info-time">
-                        {article.createdAt}
+                        {`${new Date(article.createdAt).toDateString()}`}
                       </p>
                     </div>
                   </div>
